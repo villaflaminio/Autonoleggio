@@ -1,3 +1,3 @@
 # Autonoleggio
  Sistema di base per la gestione delle prenotazioni.
- Da implementare con jdbc
+ Da implementare con jpa
