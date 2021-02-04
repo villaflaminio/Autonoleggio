@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.jdbc.JdbcCategoriaDAO;
+import dao.jpa.JpaCategoriaDAO;
 import model.Categoria;
 
 
@@ -29,9 +31,9 @@ public class MostraAdminServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		JdbcCategoriaDAO dbCategoria = JdbcCategoriaDAO.getInstance();
+		JpaCategoriaDAO dbCategoria = JpaCategoriaDAO.getInstance();
 
-		ArrayList<Categoria> list = dbCategoria.getListCategoria();
+		List<Categoria> list = dbCategoria.getListCategoria();
 	
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/jsp/admin.jsp").forward(request, response);

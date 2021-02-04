@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import dao.jdbc.JdbcCategoriaDAO;
 import dao.jdbc.JdbcNoleggioDAO;
 import dao.jdbc.JdbcUtenteDAO;
+import dao.jpa.JpaAutomobileDAO;
+import dao.jpa.JpaCategoriaDAO;
+import dao.jpa.JpaNoleggioDAO;
+import dao.jpa.JpaUtenteDAO;
 import model.Automobile;
 import model.Categoria;
 import model.Noleggio;
@@ -22,7 +26,10 @@ import model.Utente;
 @WebServlet("/BackToNuovoNoleggio")
 public class BackToNuovoNoleggio extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	JpaCategoriaDAO dbCategoria = JpaCategoriaDAO.getInstance();
+	JpaUtenteDAO dbUtente = JpaUtenteDAO.getInstance();
+	JpaNoleggioDAO dbNoleggio = JpaNoleggioDAO.getInstance();
+	JpaAutomobileDAO dbAutomobile = JpaAutomobileDAO.getInstance(); 
    
     public BackToNuovoNoleggio() {
         super();
@@ -31,8 +38,7 @@ public class BackToNuovoNoleggio extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		JdbcUtenteDAO dbUtente =JdbcUtenteDAO.getInstance();
-		JdbcNoleggioDAO dbNoleggio = JdbcNoleggioDAO.getInstance();		
+			
 		int utente = Integer.parseInt(request.getParameter("utente"));
 		Utente u = dbUtente.getUtenteById(utente);
 
@@ -49,8 +55,7 @@ public class BackToNuovoNoleggio extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		JdbcUtenteDAO dbUtente =JdbcUtenteDAO.getInstance();
-		JdbcNoleggioDAO dbNoleggio = JdbcNoleggioDAO.getInstance();		
+		
 		int utente = Integer.parseInt(request.getParameter("utente"));
 		Utente u = dbUtente.getUtenteById(utente);
 		
@@ -68,8 +73,19 @@ public class BackToNuovoNoleggio extends HttpServlet {
      	   
      		
      		ArrayList<Automobile> automobilifree = dbNoleggio.getAutoDisponibili(dateInizio,dateFine);
-     		ArrayList<Categoria> categorieConAutoDisponibili = dbNoleggio.getCategoriaAutoDisponibili(dateInizio,dateFine);
+     		ArrayList<Categoria> categorieConAutoDisponibili = dbNoleggio.getCategoriaAutoDisponibili(dateInizio,dateFine);/*
+     		System.out.println("auto free");
+
      		
+     		for(Automobile a: automobilifree) {
+     			System.out.println(a.getId());
+     		}
+     		System.out.println("categorie free");
+
+     		for(Categoria a: categorieConAutoDisponibili) {
+     			System.out.println(a.getId());
+     		}
+     		*/
     		
      		request.setAttribute("list", categorieConAutoDisponibili);
       		request.setAttribute("utente", u.getId());

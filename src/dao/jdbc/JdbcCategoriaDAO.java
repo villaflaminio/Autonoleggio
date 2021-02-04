@@ -30,6 +30,7 @@ public class JdbcCategoriaDAO implements CategoriaDAO{
 		}
 		return instance;
 	}
+	/*
 	public boolean inserisciCategoria(Categoria categoria) {
 		try(Connection connection = JdbcDAOFactory.getConnection()){
 			String query = "INSERT INTO " + TABELLA_CATEGORIA + "("
@@ -112,6 +113,7 @@ public class JdbcCategoriaDAO implements CategoriaDAO{
 
 		return categoria;
 	}
+	
 	public boolean existCateogira(String nome) {
 		Utente utente = null;
 
@@ -133,6 +135,30 @@ public class JdbcCategoriaDAO implements CategoriaDAO{
 
 		return false;
 	}
-	
+	*/
+
+	@Override
+	public boolean inserisciCategoria(Categoria categoria) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Categoria getCategoria(int idRicerca) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Categoria> getListCategoria() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean existCategoria(String nome) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }

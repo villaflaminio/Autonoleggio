@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Autonoleggio</name>
+	<name>AutonoleggioJPA</name>
 	<comment></comment>
 	<projects>
+		<project>mysql-connector-java-8.0.23</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -26,7 +26,7 @@
 			String targa= a.getTarga();
 			String marca= a.getMarca();
 			int numeroPorte = a.getNumeroPorte();
-			boolean prenotabile = a.isPrenotabile();
+			boolean prenotabile = a.getPrenotabile();
 	 			%>			
 				
 	<div class="card" style="width: 50rem;">

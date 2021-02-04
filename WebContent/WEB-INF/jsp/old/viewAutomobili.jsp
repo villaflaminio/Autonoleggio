@@ -1,4 +1,6 @@
- <%@page import="model.Automobile"%>
+ <%@page import="model.Categoria"%>
+<%@page import="java.util.List"%>
+<%@page import="model.Automobile"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -40,20 +42,21 @@
   </thead>
   <tbody>
     <%
- 		ArrayList<Automobile> list = (ArrayList<Automobile>)request.getAttribute("list");
-		int idCategoria = (int)request.getAttribute("idCategoria");
+ 		List<Automobile> list = (List<Automobile>)request.getAttribute("list");
+		//int idCategoria = (int)request.getAttribute("idCategoria");
 
  		for(Automobile a : list ){
- 			int id = a.getId();
+ 			int idAuto = a.getId();
 			String targa= a.getTarga();
 			String marca= a.getMarca();
 			int numeroPorte = a.getNumeroPorte();
-			boolean prenotabile = a.isPrenotabile();
+			int idCategoria = a.getCategoria().getId();
+			boolean prenotabile = a.getPrenotabile();
  			%>			
 			
 			<tr>
 		
-			<td><%=id %></td> 			
+			<td><%=idAuto %></td> 			
 			<td><%=marca %></td>
 			<td><%=targa %></td> 
 			<td><%=numeroPorte %></td>
@@ -66,7 +69,7 @@
 				   <option value="No" <% if(!prenotabile){ %> selected <%} %>>No</option>
 			  </select>
 	  	 	<input type= "Hidden" placeholder="cars" name="cars"><br>		
-	  	 	<input type= "Hidden" value=<%=id %> name="id"><br>		
+	  	 	<input type= "Hidden" value=<%=idAuto %> name="idAuto"><br>		
 		  	 	
         	<button type="submit" class="btn btn-primary" value="Modifica">cambia</button>
 	        </form>	
@@ -74,8 +77,8 @@
 			
 			<td>
 			<form action="ModificaAutomobileServlet" method="GET">
-		  	 	<input type= "Hidden" value=<%=id %> name="idAuto"><br>		
-			  	<input type= "Hidden" value=<%=idCategoria %> name="idCategoria"><br>		
+		  	 	<input type= "Hidden" value=<%=idAuto %> name="idAuto"><br>		
+			  	
 	
 		 		<button type="submit" class="btn btn-primary" value="Modificaa">Modificaa</button>
 		 	</form>

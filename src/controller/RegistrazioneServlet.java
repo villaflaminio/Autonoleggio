@@ -18,16 +18,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.jdbc.JdbcCategoriaDAO;
 import dao.jdbc.JdbcUtenteDAO;
+import dao.jpa.JpaCategoriaDAO;
+import dao.jpa.JpaUtenteDAO;
 import model.Utente;
 
 
 @WebServlet("/RegistrazioneServlet")
 public class RegistrazioneServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-   
+	private static final long serialVersionUID = 1L;       
+	JpaUtenteDAO dbUtente = JpaUtenteDAO.getInstance();
+	
+	
     public RegistrazioneServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +42,6 @@ public class RegistrazioneServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		JdbcUtenteDAO dbUtente = JdbcUtenteDAO.getInstance();
 
 		String emailInserito = request.getParameter("inputEmail");
         String passwordInserita = request.getParameter("inputPassword");
@@ -69,7 +72,7 @@ public class RegistrazioneServlet extends HttpServlet {
 				GregorianCalendar cal = (GregorianCalendar) GregorianCalendar.getInstance();
 				   cal.setTime(dateNascita);
 				if(maggiorenne(cal)) {
-					Utente u = new Utente(emailInserito,passwordInserita,nome,cognome,dateNascitaSQL);
+					Utente u = new Utente(nome,cognome,emailInserito,passwordInserita,dateNascitaSQL);
 					dbUtente.inserisciUtente(u);
 					request.setAttribute("errore", "registrazione effettuata");
 
@@ -77,7 +80,7 @@ public class RegistrazioneServlet extends HttpServlet {
 	
 					//registrazione effettuata
 					System.out.println(emailInserito + " " + passwordInserita+ " " + nome+ " " + cognome + " " +stringDataNascita);
-			        request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+			        request.getRequestDispatcher("login.jsp").forward(request, response);
 					
 				}else {
 					request.setAttribute("errore", "utente minorenne");
@@ -99,6 +102,9 @@ public class RegistrazioneServlet extends HttpServlet {
 
 		}
 		
+		
+        request.getRequestDispatcher("login.jsp").forward(request, response);
+
 	}
 	
 	public static boolean maggiorenne(GregorianCalendar datanascita)

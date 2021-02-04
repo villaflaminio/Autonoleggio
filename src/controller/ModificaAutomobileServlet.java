@@ -8,17 +8,27 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.jdbc.JdbcAutomobileDAO;
 import dao.jdbc.JdbcCategoriaDAO;
+import dao.jpa.JpaAutomobileDAO;
+import dao.jpa.JpaCategoriaDAO;
+import dao.jpa.JpaNoleggioDAO;
+import dao.jpa.JpaUtenteDAO;
 import model.Automobile;
 import model.Categoria;
+import model.Utente;
 
 
 @WebServlet("/ModificaAutomobileServlet")
 public class ModificaAutomobileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    int idCategoria;
+	JpaCategoriaDAO dbCategoria = JpaCategoriaDAO.getInstance();
+	JpaUtenteDAO dbUtente = JpaUtenteDAO.getInstance();
+	JpaNoleggioDAO dbNoleggio = JpaNoleggioDAO.getInstance();
+	JpaAutomobileDAO dbAutomobile = JpaAutomobileDAO.getInstance();
+	
 
     public ModificaAutomobileServlet() {
         super();
@@ -27,11 +37,9 @@ public class ModificaAutomobileServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		JdbcAutomobileDAO dbAutomobile = JdbcAutomobileDAO.getInstance();
 		int idAuto = Integer.parseInt(request.getParameter("idAuto"));
-		int idCategoria = Integer.parseInt(request.getParameter("idCategoria"));
 
-		Automobile autoDaModificare = dbAutomobile.getAutomobileById(idAuto);
+		Automobile autoDaModificare = dbAutomobile.getAutomobile(idAuto);
 
  		request.setAttribute("autoDaModificare", autoDaModificare);
 		request.getRequestDispatcher("WEB-INF/jsp/modificaAuto.jsp").forward(request, response);
@@ -40,10 +48,9 @@ public class ModificaAutomobileServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		JdbcAutomobileDAO dbAutomobile = JdbcAutomobileDAO.getInstance();
-		JdbcCategoriaDAO dbCategoria = JdbcCategoriaDAO.getInstance();
-
+		HttpSession session = request.getSession();
+    	Categoria c = (Categoria)session.getAttribute("categoria");
+    	
 		String marcaInserita = request.getParameter("marca");
 		String targaInserita = request.getParameter("targa");
 		int numeroPorteInserita=0;
@@ -54,36 +61,23 @@ public class ModificaAutomobileServlet extends HttpServlet {
 		
 		if(!marcaInserita.isBlank() && !targaInserita.isBlank() ) {
 		     
-		        if(targaInserita.matches("(?!EE)(?!Ee)(?!eE)(?!ee)[A-HJ-NPR-TV-Za-hj-npr-tv-z]{2}\\d{3}[A-HJ-NPR-TV-Za-hj-npr-tv-z]{2}\\b")){		          
+		        if(targaInserita.matches("(?!EE)(?!Ee)(?!eE)(?!ee)[A-HJ-NPR-TV-Za-hj-npr-tv-z]{2}\\d{3}[A-HJ-NPR-TV-Za-hj-npr-tv-z]{2}\\b")){
+		        	Automobile a = new Automobile(id,marcaInserita,targaInserita,numeroPorteInserita,c ,true);
 		        	
-		    		dbAutomobile.modificaAutomobile(id,targaInserita,marcaInserita,numeroPorteInserita);
+		    		dbAutomobile.inserisciAutomobile(a, c);
 
 		        }else {
 	 				request.setAttribute("errore", "La targa non rispetta le regole italiane");		          
-	 				int idAuto = Integer.parseInt(request.getParameter("idAuto"));
-	 				int idCategoria = Integer.parseInt(request.getParameter("idCategoria"));
-
-	 				Automobile autoDaModificare = dbAutomobile.getAutomobileById(idAuto);
-
-	 		 		request.setAttribute("autoDaModificare", autoDaModificare);
-	 				request.getRequestDispatcher("WEB-INF/jsp/modificaAuto.jsp").forward(request, response);	        
+	 					        
 	        	}
 		}else {
 		        request.setAttribute("errore", "Riempire tutti i campi");
-		        int idAuto = Integer.parseInt(request.getParameter("idAuto"));
-				int idCategoria = Integer.parseInt(request.getParameter("idCategoria"));
-
-				Automobile autoDaModificare = dbAutomobile.getAutomobileById(idAuto);
-
-		 		request.setAttribute("autoDaModificare", autoDaModificare);
-				request.getRequestDispatcher("WEB-INF/jsp/modificaAuto.jsp").forward(request, response);	      
-		    
+		        
 		}
 
 		int idAuto = Integer.parseInt(request.getParameter("idAuto"));
-		int idCategoria = Integer.parseInt(request.getParameter("idCategoria"));
 
-		Automobile autoDaModificare = dbAutomobile.getAutomobileById(idAuto);
+		Automobile autoDaModificare = dbAutomobile.getAutomobile(idAuto);
 
  		request.setAttribute("autoDaModificare", autoDaModificare);
 		request.getRequestDispatcher("WEB-INF/jsp/modificaAuto.jsp").forward(request, response);	

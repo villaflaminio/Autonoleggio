@@ -42,7 +42,7 @@ public class JdbcNoleggioDAO {
 		return instance;
 	}
 	
-	 
+	 /*
 	public List<Noleggio> getNoleggiUtente(Utente u) {
 		List<Noleggio> noleggi = new ArrayList<>();
 		
@@ -82,7 +82,6 @@ public class JdbcNoleggioDAO {
 		}
 		return noleggi;
 	}
-	
 	public List<Noleggio> getNoleggi() {
 		List<Noleggio> noleggi = new ArrayList<>();
 		
@@ -123,7 +122,8 @@ public class JdbcNoleggioDAO {
 		return noleggi;
 	}
 	
-	
+		
+
 	
 	
 	public boolean inserisciNoleggio(Noleggio noleggio) {
@@ -214,7 +214,6 @@ public class JdbcNoleggioDAO {
 		return categoria;
 	}
 	
-	
 	public boolean deleteNoleggio(int idNoleggio) {
 		try(Connection connection = JdbcDAOFactory.getConnection()) {
 			String sql = " DELETE FROM "+TABELLA_NOLEGGIO+" WHERE id = "+ " ?";
@@ -272,5 +271,5 @@ public class JdbcNoleggioDAO {
 		}
 		return null;
 	}
-
+*/
 }

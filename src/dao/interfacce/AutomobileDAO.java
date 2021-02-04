@@ -1,6 +1,7 @@
 package dao.interfacce;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Automobile;
 import model.Categoria;
@@ -8,8 +9,10 @@ import model.Categoria;
 public interface AutomobileDAO {
 	
 	public boolean inserisciAutomobile(Automobile automobile,Categoria categoria);
-	public boolean modificaPrenotabile(int id,int prenotabile);
-	public ArrayList<Automobile> getListAutomobile();
-	public ArrayList<Automobile> getAutomobiliCategoria(int idRicerca);
-
+	public List<Automobile> getListAutomobile();			
+	public List<Automobile> getAutomobiliPerCategoria(Categoria categoria);		
+	public Automobile getAutomobile(int id);
+	public List<Integer> getCategorieAutoDisponibili();			
+	public boolean existAutomobile(String targa);
+	
 }

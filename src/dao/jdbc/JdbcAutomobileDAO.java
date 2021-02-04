@@ -36,7 +36,7 @@ public class JdbcAutomobileDAO implements AutomobileDAO {
 		}
 		return instance;
 	}
-	
+	/*
 	public boolean inserisciAutomobile(Automobile automobile,Categoria categoria) {
 		try(Connection connection = JdbcDAOFactory.getConnection()){
 			String query = "INSERT INTO " + TABELLA_AUTOMOBILE + "("
@@ -58,7 +58,9 @@ public class JdbcAutomobileDAO implements AutomobileDAO {
 
 		return false;
 	}
-	
+	*/
+	/* USO modificaAutomobile
+	 * 
 	public boolean modificaPrenotabile(int id,int prenotabile) {
 		try(Connection connection = JdbcDAOFactory.getConnection()){
 
@@ -75,7 +77,8 @@ public class JdbcAutomobileDAO implements AutomobileDAO {
 		}
 
 		return false;
-	}
+	}*/
+	/*
 	public ArrayList<Automobile> getListAutomobile() {
 		ArrayList<Automobile> automobile = new ArrayList();
 		Automobile a = null;
@@ -142,8 +145,8 @@ public class JdbcAutomobileDAO implements AutomobileDAO {
 		}
 
 		return automobile;
-	}
-	
+	}*/
+	/*
 	public ArrayList<Automobile> getAutomobiliCategoria(int idRicerca) {
 		ArrayList<Automobile> automobile = new ArrayList();
 		Automobile a = null;
@@ -176,8 +179,8 @@ public class JdbcAutomobileDAO implements AutomobileDAO {
 
 		return automobile;
 	}
-	
-	
+	*/
+	/*
 	public int getCategoriaFromId(int idRicerca) {
 		
 		int idCategoria = 0;
@@ -199,6 +202,7 @@ public class JdbcAutomobileDAO implements AutomobileDAO {
 
 		return idCategoria;
 	}
+	
 	public Automobile getAutomobileById(int idRicerca) {
 		Automobile a = null;
 		try(Connection connection = JdbcDAOFactory.getConnection()){
@@ -228,6 +232,7 @@ public class JdbcAutomobileDAO implements AutomobileDAO {
 		return a;
 	}
 	
+
 	public boolean modificaAutomobile(int id, String targaInserita,String marcaInserita,int numeroPorteInserita) {
 		try(Connection connection = JdbcDAOFactory.getConnection()){
 
@@ -247,7 +252,7 @@ public class JdbcAutomobileDAO implements AutomobileDAO {
 
 		return false;
 	}
-	
+
 	public ArrayList<Integer> getCategorieAutoDisponibili() {
 		ArrayList<Integer> categorieConAutoDisponibili = new ArrayList();
 		
@@ -270,8 +275,8 @@ public class JdbcAutomobileDAO implements AutomobileDAO {
 
 		return categorieConAutoDisponibili;
 	}
-	
-	 
+		*/
+	 /*
 	public ArrayList<Automobile> getAutoDisponibili(int idRicerca) {
 		ArrayList<Automobile> automobile = new ArrayList();
 		Automobile a = null;
@@ -333,7 +338,7 @@ public class JdbcAutomobileDAO implements AutomobileDAO {
 			e.printStackTrace();
 		}
 		return automobile;
-	}
+	} /*
 	public boolean existAutomobile(String targa) {
 		Utente utente = null;
 
@@ -355,5 +360,42 @@ public class JdbcAutomobileDAO implements AutomobileDAO {
 
 		return false;
 	}
-	
+	*/
+
+	@Override
+	public boolean inserisciAutomobile(Automobile automobile, Categoria categoria) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<Automobile> getListAutomobile() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Automobile> getAutomobiliPerCategoria(Categoria categoria) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Automobile getAutomobile(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Integer> getCategorieAutoDisponibili() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean existAutomobile(String targa) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

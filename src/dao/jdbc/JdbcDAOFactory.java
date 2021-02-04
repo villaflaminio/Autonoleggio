@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 import dao.DAOFactory;
 import dao.interfacce.AutomobileDAO;
 import dao.interfacce.CategoriaDAO;
+import dao.interfacce.NoleggioDAO;
 import dao.interfacce.UtenteDAO;
 
 public class JdbcDAOFactory extends DAOFactory {
@@ -38,6 +39,12 @@ public class JdbcDAOFactory extends DAOFactory {
 			e.printStackTrace();
 		}
 
+		return null;
+	}
+
+	@Override
+	public NoleggioDAO getNoleggioDAO() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -36,8 +36,20 @@ public class JdbcUtenteDAO implements UtenteDAO {
 		return utenteDAO;
 	}
 
-	
+	@Override
+	public Utente getUtente(String email, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+	@Override
+	public boolean inserisciUtente(Utente utente) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+/*
 	public Utente getUtente(String email, String password) {
 		Utente utente = null;
 
@@ -71,7 +83,8 @@ public class JdbcUtenteDAO implements UtenteDAO {
 		}
 
 		return utente;
-	}
+	}*/
+	/*
 	public boolean existUtente(String email) {
 		Utente utente = null;
 
@@ -84,16 +97,44 @@ public class JdbcUtenteDAO implements UtenteDAO {
 			ResultSet resultSet = statement.executeQuery();
 
 			if(resultSet.next()) {
-				return false;
+				return true;
 
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 
-		return true;
+		return false;
 	}
 	
+	public Utente getUtenteByMail(String email) {
+		Utente utente = null;
+
+		try(Connection connection = JdbcDAOFactory.getConnection()){
+			String query = "SELECT * FROM " + TABELLA_UTENTE + " WHERE " +
+					UTENTE_EMAIL + " = ? ";
+			
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, email);
+			ResultSet resultSet = statement.executeQuery();
+
+			if(resultSet.next()) {
+				String nome = resultSet.getString(resultSet.findColumn(UTENTE_NOME));
+				String password = resultSet.getString(resultSet.findColumn(UTENTE_PASSWORD));
+
+				String cognome = resultSet.getString(resultSet.findColumn(UTENTE_COGNOME));
+				String dateNascita = resultSet.getString(resultSet.findColumn(UTENTE_DATANASCITA));
+
+				utente = new Utente(email, password, nome, cognome,dateNascita);
+
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+
+		return utente;
+	}*/
+	/*
 	public Utente getUtenteById(int id) {
 		Utente utente = null;
 
@@ -156,7 +197,7 @@ public class JdbcUtenteDAO implements UtenteDAO {
 
 		return false;
 	}
-	
+	*/
 
 
 }
